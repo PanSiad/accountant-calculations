@@ -14,28 +14,9 @@ public class Accountant {
 
     public void calculate(String method, int a, int b) {
 
-        boolean firstArgumentIsValid = false;
-        boolean secondArgumentIsValid = false;
+        if (checkIfArgumentsAreValid(method, a, b)) {
 
-        if (a >= 1 && a <= 100) {
-            firstArgumentIsValid = true;
-        } else {
-            System.out.println("Error! First argument value " + a + " is invalid. A number between 1-100 must be given.");
-        }
-
-        if ((b >= 1 && b <= 100) || (b == 0 && method.equals("primeFactorization"))) {
-            secondArgumentIsValid = true;
-        } else {
-            if (b == 0 && !method.equals("primeFactorization")) {
-                System.out.println("Error! primeFactorization method must be used for second argument = 0");
-            } else {
-                System.out.println("Error! Second argument value " + b + " is invalid. A number between 1-100 must be given.");
-            }
-        }
-
-        if (firstArgumentIsValid && secondArgumentIsValid) {
-
-            String result = "";
+            String result;
             switch (method) {
                 case "add":
                     result = String.valueOf(this.calculator.add(a, b));
@@ -88,5 +69,29 @@ public class Accountant {
 
     public static void showTotalCalculations() {
         System.out.println("Total calculations made by all accountants are: " + totalCalculations);
+    }
+
+    private boolean checkIfArgumentsAreValid(String method, int a, int b) {
+
+        boolean firstArgumentIsValid = false;
+        boolean secondArgumentIsValid = false;
+
+        if (a >= 1 && a <= 100) {
+            firstArgumentIsValid = true;
+        } else {
+            System.out.println("Error! First argument value " + a + " is invalid. A number between 1-100 must be given.");
+        }
+
+        if ((b >= 1 && b <= 100) || (b == 0 && method.equals("primeFactorization"))) {
+            secondArgumentIsValid = true;
+        } else {
+            if (b == 0 && !method.equals("primeFactorization")) {
+                System.out.println("Error! primeFactorization method must be used for second argument = 0");
+            } else {
+                System.out.println("Error! Second argument value " + b + " is invalid. A number between 1-100 must be given.");
+            }
+        }
+
+        return firstArgumentIsValid && secondArgumentIsValid;
     }
 }
